@@ -69,6 +69,10 @@ func (s *myserver) DELETE(route string, handler MyHandler) {
   s.route(http.MethodDelete, route, handler)
 }
 
+type requestResponse struct {
+  request *http.Request
+  response http.ResponseWriter
+}
 
 
 
