@@ -10,8 +10,8 @@ import (
 func main() {
 	fmt.Println(Prompt("My HTTP Server"))
 	myServer := new(myserver)
-	myServer.GET("/hello", myHelloHandler)
-	http.ListenAndServe("localhost:8080", myServer)
+	myServer.GET("/hello/a/b/c/:num", myHelloHandler)
+	http.ListenAndServe("localhost:64640", myServer)
 }
 
 type MyHandler func(server requestResponse)
@@ -113,7 +113,7 @@ func (s *myserver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func myHelloHandler(s requestResponse) {
-	fmt.Fprint(s.Response(), "This is a new world!")
+	fmt.Fprint(s.Response(), "<b>This is a new world!</b>")
 }
 
 func logger(next http.Handler) http.Handler {
