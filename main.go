@@ -108,6 +108,9 @@ func (s *myserver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
   }
 }
 
+func myHelloHandler(s requestResponse) {
+  fmt.Fprint(s.Response(), "This is a new world!")
+}
 
 
 
