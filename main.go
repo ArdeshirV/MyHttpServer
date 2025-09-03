@@ -61,6 +61,13 @@ func (s *myserver) PATCH(route string, handler MyHandler) {
   s.route(http.MethodPatch, route, handler)
 }
 
+func (s *myserver) PUT(route string, handler MyHandler) {
+  s.route(http.MethodPut, route, handler)
+}
+
+func (s *myserver) DELETE(route string, handler MyHandler) {
+  s.route(http.MethodDelete, route, handler)
+}
 
 
 
