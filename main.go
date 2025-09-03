@@ -113,7 +113,7 @@ func (s *myserver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func myHelloHandler(s requestResponse) {
-	fmt.Fprint(s.Response(), "<b>This is a new world!</b>")
+	fmt.Fprint(s.Response(), "<h2>This is a new world!</h2>")
 }
 
 func logger(next http.Handler) http.Handler {
