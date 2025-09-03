@@ -74,6 +74,10 @@ type requestResponse struct {
   response http.ResponseWriter
 }
 
+func (s *requestResponse) Request() *http.Request {
+  return s.request
+}
+
 
 
 
