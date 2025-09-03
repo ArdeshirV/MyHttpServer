@@ -78,7 +78,35 @@ func (s *requestResponse) Request() *http.Request {
   return s.request
 }
 
+func (s *requestResponse) Response() http.ResponseWriter {
+  return s.response
+}
 
+func (s *myserver) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+  server := &requestResponse{request: r, response: w}
+  urlParts := strings.Split(r.URL.Path, "/")
+  for _, route := range s.routes {
+    if len(route.parts) != len(urlParts) {
+      continue
+    }
+    for _, urlPart := range urlParts {
+      for _, urlParam := range route.parts {
+        if urlPart != urlParam && !strings.HasPrefix(urlParam, ":") {
+          continue
+        }
+      }
+    }
+
+    if r.Method != route.method {
+      w.WriteHeader(http.StatusMethodNotAllowed)
+      fmt.Fprintf(w, "Method not allowd")
+      return
+    }
+
+    route.handler(server)
+    return
+  }
+}
 
 
 
