@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 func main() {
@@ -33,3 +34,34 @@ type Route struct {
   handler MyHandler
   method string 
 }
+
+func NewServer() *myserver {
+  return &myserver{
+    routes: []Route{},
+  }
+}
+
+func (s *myserver) route(method, route string, handler MyHandler) {
+  s.routes = append(s.routes, Route{
+    parts: strings.Split(route, "/"),
+    handler: handler,
+    method: method,
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
