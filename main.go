@@ -4,13 +4,17 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
+	"time"
 )
 
 func main() {
 	fmt.Println(Prompt("My HTTP Server"))
+  myServer := new(myserver)
+  myServer.GET("/hello/a/b/c/:num", myHelloHandler)
+  http.ListenAndServe("localhost:8080", myServer)
 }
 
-type MyHandler func(server RequestResponse)
+type MyHandler func(server requestResponse)
 
 type MyServer interface {
   GET(route string, handler MyHandler)
@@ -112,11 +116,11 @@ func myHelloHandler(s requestResponse) {
   fmt.Fprint(s.Response(), "This is a new world!")
 }
 
-
-
-
-
-
-
-
-
+func logger(next http.Handler) http.Handler {
+  return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    t := time.Now()
+    time.Sleep(time.Second)
+    next.ServeHTTP(w, r)
+    fmt.Println("Took:", time.Since(t))
+  })
+}
