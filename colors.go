@@ -98,4 +98,3 @@ func Out(text string) string {
 func In(text string) string {
 	return GreenBold + text + Normal
 }
-
