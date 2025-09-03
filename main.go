@@ -49,6 +49,13 @@ func (s *myserver) route(method, route string, handler MyHandler) {
   })
 }
 
+func (s *myserver) GET(route string, handler MyHandler) {
+  s.route(http.MethodGet, route, handler)
+}
+
+func (s *myserver) POST(route string, handler MyHandler) {
+  s.route(http.MethodPost, route, handler)
+}
 
 
 
