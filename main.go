@@ -57,7 +57,9 @@ func (s *myserver) POST(route string, handler MyHandler) {
   s.route(http.MethodPost, route, handler)
 }
 
-
+func (s *myserver) PATCH(route string, handler MyHandler) {
+  s.route(http.MethodPatch, route, handler)
+}
 
 
 
